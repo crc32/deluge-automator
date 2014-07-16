@@ -50,7 +50,7 @@ fi
 if [ "$ROOT/deluge.tv/" == "$torrentpath" ]
 then
 	echo "     This is an auto-rss torrent, deleting from deluge and sending with SCP" >> ~/execute_script.log
-	deluge-console "\"connect " $DELUGESERVER ":" $DELUGEPORT " " $DELUGEUSER " " $DELUGEPASS "; del " $torrentid "\""
+	deluge-console "connect $DELUGESERVER:$DELUGEPORT $DELUGEUSER $DELUGEPASS; del $torrentid"
 	if [ -f "$torrentpath/$torrentname" ]
 	then
 		echo "     Torrent is a single file" >> ~/execute_script.log
