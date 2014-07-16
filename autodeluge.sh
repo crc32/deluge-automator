@@ -18,6 +18,10 @@ ROOT='LOCALROOT' # Reset with local root for downloads
 TARGETDIRRSS='/Volumes/Public-XS/TV-Inbox' # Remote directory for RSS Feeds
 TARGETDIRMANUAL='/Volumes/Public-XS/Torrent-Inbox' # Remote directory for Manual Torrents
 NOW=$(date +"%m-%d-%y")
+DELUGESERVER='127.0.0.1' # deluged server address
+DELUGEPORT='xxxxx' # deluged port
+DELUGEUSER='xxxxx' # login for deluged
+DELUGEPASS='xxxxx' # Password for deluged
 
 # Pushover Options
 USEPUSHOVER='1';
@@ -45,7 +49,8 @@ fi
 
 if [ "$ROOT/deluge.tv/" == "$torrentpath" ]
 then
-	echo "     This is an auto-rss torrent, sending with SCP" >> ~/execute_script.log
+	echo "     This is an auto-rss torrent, deleting from deluge and sending with SCP" >> ~/execute_script.log
+	deluge-console "\"connect " $DELUGESERVER ":" $DELUGEPORT " " $DELUGEUSER " " $DELUGEPASS "; del " $torrentid "\""
 	if [ -f "$torrentpath/$torrentname" ]
 	then
 		echo "     Torrent is a single file" >> ~/execute_script.log
