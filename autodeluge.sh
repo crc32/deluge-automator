@@ -102,7 +102,5 @@ fi
 
 # Cleanup old files to ensure that the server doesn't get full
 
-find $ROOT/deluge.tv -type f -mtime +3 -exec rm {} \;
-find $ROOT/deluge.files -type f -mtime +3 -exec rm {} \;
-find $ROOT/deluge.tv -type d -empty -exec rmdir {} \;
-find $ROOT/deluge.files -type d -empty -exec rmdir {} \;
+find $ROOT/deluge.tv -iname "*" -mtime +5 -print0 | xargs -0 rm -fR
+find $ROOT/deluge.files -iname "*" -mtime +5 -print0 | xargs -0 rm -fR
